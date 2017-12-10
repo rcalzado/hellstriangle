@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<script>
+			var triangulo = [[6], [3, 5], [9, 7, 1], [4, 6, 8, 4]];
+		
+			function calculaTriangulo(tri, nivel, posicao, valorAcumulado, valorMaximo) {
+				valorAcumulado += tri[nivel][posicao];
+				
+				if (nivel == tri.length - 1) {
+					if (valorAcumulado > valorMaximo) valorMaximo = valorAcumulado;
+					
+				} else {					
+					for (var p = posicao; p<=posicao+1; p++) 
+						valorMaximo = calculaTriangulo(tri, nivel+1, p, valorAcumulado, valorMaximo);
+				}
+				
+				return valorMaximo;
+			}
+			
+			//----------------------------------------\\
+			
+			function testeAutomatico() {
+				var tri = [];
+				var qtd = 1;
+				
+				for (var x=0; x<4; x++) {
+					var valor = [];
+					for (var n=0; n<qtd; n++) valor.push(Math.floor((Math.random() * 10)));
+					tri.push(valor);
+					qtd++;
+				}
+				
+				console.log(tri);
+				alert(calculaTriangulo(tri, 0, 0, 0, 0));
+			}			
+
+			//----------------------------------------\\
+			
+			//testeAutomatico(); //Para o teste automático, descomente esta linha e comente a linha abaixo
+			
+			alert(calculaTriangulo(triangulo, 0, 0, 0, 0));
+			
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>
